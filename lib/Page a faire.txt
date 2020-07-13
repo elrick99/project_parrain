@@ -1,0 +1,9 @@
+Page a faire 
+    - Liste des tâches ( possibilité de supprimer Dissmissible)
+        * tache en cours 
+        * tache accomplis
+        * tache raté
+    - Priorité (Tab Bar)
+        * Urgent 
+        * Important
+        * Moins Important
