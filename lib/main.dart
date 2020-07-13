@@ -8,7 +8,7 @@ import 'package:project_parrain/Screens/Taskperformed.dart';
 import 'package:project_parrain/Screens/accueil.dart';
 import 'package:project_parrain/Screens/create.dart';
 import 'package:project_parrain/Screens/inscription.dart';
-import 'package:project_parrain/Screens/inscripton.dart';
+import 'package:project_parrain/Screens/inscripS.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import 'package:provider/provider.dart';

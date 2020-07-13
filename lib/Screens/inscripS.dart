@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Inscription extends StatefulWidget {
+class InscriptionS extends StatefulWidget {
   @override
-  _InscriptionState createState() => _InscriptionState();
+  _InscriptionSState createState() => _InscriptionSState();
 }
 
-class _InscriptionState extends State<Inscription> {
+class _InscriptionSState extends State<InscriptionS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
