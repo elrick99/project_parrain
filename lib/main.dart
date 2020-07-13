@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider.value(value: ProEvent())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Dem',
+        title: 'Flutter d',
         theme: ThemeData(
           primarySwatch: Colors.purple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
