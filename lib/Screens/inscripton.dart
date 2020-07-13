@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Connexion extends StatefulWidget {
+class Inscription extends StatefulWidget {
   @override
-  _ConnexionState createState() => _ConnexionState();
+  _InscriptionState createState() => _InscriptionState();
 }
 
-class _ConnexionState extends State<Connexion> {
+class _InscriptionState extends State<Inscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _ConnexionState extends State<Connexion> {
                 height: 250,
                 padding: EdgeInsets.only(top: 100, left: 50),
                 width: MediaQuery.of(context).size.width,
-                child: Text("Connexion",
+                child: Text("Inscription",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -29,13 +29,13 @@ class _ConnexionState extends State<Connexion> {
                 height: 570,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Colors.white60,
+                    color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(100))),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Container(
                         height: 60,
@@ -58,7 +58,6 @@ class _ConnexionState extends State<Connexion> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
                       Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width / 1.2,
@@ -80,7 +79,6 @@ class _ConnexionState extends State<Connexion> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
                       Container(
                         height: 60,
                         width: MediaQuery.of(context).size.width / 1.2,
@@ -102,7 +100,27 @@ class _ConnexionState extends State<Connexion> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 100),
+                      Container(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1, color: Colors.purple.shade800),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Adresse Email",
+                              hintStyle:
+                                  TextStyle(color: Colors.purple.shade800),
+                            ),
+                          ),
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, 'inscr');
@@ -116,7 +134,7 @@ class _ConnexionState extends State<Connexion> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            "Connexion",
+                            "Inscription",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
