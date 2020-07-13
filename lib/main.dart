@@ -7,8 +7,11 @@ import 'package:project_parrain/Screens/PriorityTask.dart';
 import 'package:project_parrain/Screens/Taskcancelled.dart';
 import 'package:project_parrain/Screens/Taskperformed.dart';
 import 'package:project_parrain/Screens/accueil.dart';
+import 'package:project_parrain/Screens/connexion.dart';
 import 'package:project_parrain/Screens/create.dart';
+
 import 'package:project_parrain/Screens/homePage.dart';
+import 'package:project_parrain/Screens/inscription.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import 'package:provider/provider.dart';
@@ -24,12 +27,13 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider.value(value: ProEvent())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Dem',
+        title: 'Flutter d',
         theme: ThemeData(
           primarySwatch: Colors.purple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Login(),
+
+        home: OuvertureApp(),
         routes: {
           "newTasks": (context) => NewTasks(),
           "ongoingTask": (context) => OngoingTask()
