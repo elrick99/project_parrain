@@ -33,6 +33,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   bloc_provider: ^0.7.0
   rxdart: ^0.24.1
+  page_transition: ^1.1.5
 
 
   # The following adds the Cupertino Icons font to your application.
