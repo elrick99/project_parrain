@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Connexion extends StatefulWidget {
+class ConnexionS extends StatefulWidget {
   @override
-  _ConnexionState createState() => _ConnexionState();
+  _ConnexionSState createState() => _ConnexionSState();
 }
 
-class _ConnexionState extends State<Connexion> {
+class _ConnexionSState extends State<ConnexionS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
