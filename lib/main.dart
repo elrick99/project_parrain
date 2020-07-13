@@ -10,11 +10,15 @@ import 'package:project_parrain/Screens/accueil.dart';
 import 'package:project_parrain/Screens/create.dart';
 
 import 'package:project_parrain/Screens/homePage.dart';
+import 'package:project_parrain/Screens/homp.dart';
 import 'package:project_parrain/Screens/inscription.dart';
 import 'package:project_parrain/Screens/inscripS.dart';
+import 'package:project_parrain/Screens/inscriptionD.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import 'package:provider/provider.dart';
+
+import 'Screens/connexionD.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,7 +40,10 @@ class MyApp extends StatelessWidget {
         home: OuvertureApp(),
         routes: {
           "newTasks": (context) => NewTasks(),
-          "ongoingTask": (context) => OngoingTask()
+          "ongoingTask": (context) => OngoingTask(),
+          "vershomp": (context)=>Homp(),
+          "versconnection":(context)=>ConnexionD(),
+          "versinscription":(context)=>InscriptionD(),
         },
       ),
     );

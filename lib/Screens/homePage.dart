@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import '../animation/fadeanimation.dart';
+import 'homp.dart';
 
 
 class OuvertureApp extends StatefulWidget {
@@ -80,11 +81,13 @@ class _OuvertureAppState extends State<OuvertureApp> with TickerProviderStateMix
             end: 32.0
             ).animate( _scale2Controller)..addStatusListener((status){
              if(status == AnimationStatus.completed){
-              Navigator.push(context, 
-              PageTransition(type: PageTransitionType.fade, child:SideBarLayou() )
+              Navigator.pushReplacement(context,
+                  //faire la transition sur une autre page
+                  PageTransition(type: PageTransitionType.fade, child:Homp() )
               );
              }
-            }); 
+
+            });
             }
 
   @override

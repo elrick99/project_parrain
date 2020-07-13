@@ -31,45 +31,55 @@ class Homp extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 100),
-              width: 250,
-              height: 56,
-              decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white)),
-              child: Text(
-                "Connexion",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, "versconnection");
+              },
+              child: Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(top: 100),
+                width: 250,
+                height: 56,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white)),
+                child: Text(
+                  "Connexion",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
             ),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 40),
-              width: 200,
-              height: 56,
-              decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white)),
-              child: Text(
-                "Inscription",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, "versinscription");
+              },
+              child: Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(top: 40),
+                width: 200,
+                height: 56,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white)),
+                child: Text(
+                  "Inscription",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 140, left: 90),
+              padding: const EdgeInsets.only(top: 200),
               child: Text(
                 "Géré vos activités en toute simplicité",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(color: Colors.white, fontSize: 16,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(

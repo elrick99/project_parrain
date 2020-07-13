@@ -262,11 +262,7 @@ class _OngoingTaskState extends State<OngoingTask> {
                 height: 100,
                 width: 10,
                 decoration: BoxDecoration(
-                    color: (todo.priority == "Urgent" ||
-                            todo.priority == "Moins Important" ||
-                            todo.priority == "Important")
-                        ? Colors.red[400]
-                        : Colors.green[400],
+                    color:colore(todo.priority) ,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
@@ -313,4 +309,23 @@ class _OngoingTaskState extends State<OngoingTask> {
           ),
         ),
       );
+
+   colore(String ok){
+    switch(ok){
+      case 'Urgent':
+       return Colors.red;
+        break;
+      case 'Moins Important':
+       return Colors.blue;
+        break;
+      case 'Important':
+       return Colors.green;
+        break;
+
+
+    }
+  }
+
 }
+
+
