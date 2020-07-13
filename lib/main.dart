@@ -21,17 +21,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider.value(value: ProEvent())],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.purple,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: SideBarLayou(),
-          routes: {
-            "newTasks":(context)=>NewTasks(),
-            "ongoingTask":(context)=>OngoingTask()
-          },),
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Dem',
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: SideBarLayou(),
+        routes: {
+          "newTasks": (context) => NewTasks(),
+          "ongoingTask": (context) => OngoingTask()
+        },
+      ),
     );
   }
 }
