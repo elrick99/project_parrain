@@ -14,6 +14,8 @@ class TodoItem {
   final String date;
   final String heure;
   final String priority;
+  final String color;
+  final String status;
   final int timing;
   // SQLite doesn't supprot DateTime. Store them as INTEGER (millisSinceEpoch).
   final DateTime createdAt;
@@ -25,6 +27,8 @@ class TodoItem {
       this.date,
       this.heure,
       this.priority,
+      this.color,
+      this.status,
       this.timing,
       this.createdAt});
 
@@ -36,6 +40,8 @@ class TodoItem {
         heure = map['heure'],
         timing = map['timing'],
         priority = map['priority'],
+        color = map['color'],
+        status = map['status'],
         createdAt = DateTime.fromMillisecondsSinceEpoch(map['createdAt']);
 
   Map<dynamic, dynamic> toJsonMap() => {
@@ -46,6 +52,8 @@ class TodoItem {
         'heure': heure,
         'timing': timing.toString(),
         'priority': priority,
+        'color': color,
+        'status': status,
         'createdAt': createdAt.millisecondsSinceEpoch,
       };
 }
@@ -79,10 +87,10 @@ class NewTasks extends StatefulWidget {
 
 class _NewTasksState extends State<NewTasks> {
   Color urgent = Colors.red;
-
   Color important = Colors.green;
   Color moins = Colors.blue;
   Color priorite = Colors.green;
+  String colors;
   String title;
   int timing;
   String change;
@@ -242,6 +250,8 @@ class _NewTasksState extends State<NewTasks> {
           heure TEXT,
           priority TEXT,
           timing INT,
+          status TEXT,
+          color TEXT,
           content TEXT,
           createdAt INT)
         ''');
@@ -264,7 +274,7 @@ class _NewTasksState extends State<NewTasks> {
       (Transaction txn) async {
         int id = await txn.rawInsert('''
           INSERT INTO $kDbTableName
-            (isDone,date,heure,priority,timing,content,createdAt)
+            (isDone,date,heure,priority,timing,status,color,content,createdAt)
           VALUES
             (
               ${todo.isDone ? 1 : 0},
@@ -272,6 +282,8 @@ class _NewTasksState extends State<NewTasks> {
               "${todo.heure}",
               "${todo.priority}",
               "${todo.timing}",
+              "En_Cours",
+               "${todo.color}",
               "${todo.content}",
               ${todo.createdAt.millisecondsSinceEpoch}
             )''');
@@ -326,7 +338,8 @@ class _NewTasksState extends State<NewTasks> {
           ),
           body: SingleChildScrollView(
             child: Container(
-              
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 // decoration: BoxDecoration(color:Colors.red),
                 child: Column(
                   children: <Widget>[
@@ -488,6 +501,7 @@ class _NewTasksState extends State<NewTasks> {
                               setState(() {
                                 priorite = urgent;
                                 priorito = "Urgent";
+                                colors = "#F50044";
                               });
                             },
                             child: Padding(
@@ -526,6 +540,7 @@ class _NewTasksState extends State<NewTasks> {
                               setState(() {
                                 priorite = important;
                                 priorito = "Important";
+                                colors = "#00BF57";
                               });
                             },
                             child: Padding(
@@ -564,6 +579,7 @@ class _NewTasksState extends State<NewTasks> {
                               setState(() {
                                 priorite = moins;
                                 priorito = "Moins Important";
+                                colors = "#0094FF";
                               });
                             },
                             child: Padding(
@@ -639,14 +655,12 @@ class _NewTasksState extends State<NewTasks> {
                                   heure: heureofday,
                                   timing: timing,
                                   priority: priorito,
+                                  color: colors,
                                   createdAt: DateTime.now(),
                                 ),
                               );
                               _updateUI();
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text('Show Snackbar'),
-                                duration: Duration(seconds: 3),
-                              ));
+
                               Navigator.pushNamed(context, "ongoingTask");
                             },
                             child: Expanded(
@@ -665,10 +679,8 @@ class _NewTasksState extends State<NewTasks> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18),
                               ),
-                            ),
-                            ),
-                          ),
-                         
+                            )),
+                          )
                         ],
                       ),
                     ),
@@ -729,8 +741,7 @@ class _NewTasksState extends State<NewTasks> {
                     //   ),
                     // )
                   ],
-                )
-                ),
+                )),
           ),
           // floatingActionButton: _buildFloatingActionButton(),
         );

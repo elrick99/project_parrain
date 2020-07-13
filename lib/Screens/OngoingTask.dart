@@ -8,6 +8,7 @@ import 'package:project_parrain/Providers/Events.dart';
 import 'package:provider/provider.dart';
 
 class TodoItem {
+  
   final int id;
   final String content;
   // SQLite doesn't supprot boolean. Use INTEGER/BIT (0/1 values).
@@ -57,6 +58,9 @@ class OngoingTask extends StatefulWidget {
 }
 
 class _OngoingTaskState extends State<OngoingTask> {
+  var urgent= "rouge";
+  var important= "vert";
+  var moinImportante="bleu";
   int id;
   static const kDbFileName = 'sqflite_ex.db';
   static const kDbTableName = 'example_tbl';

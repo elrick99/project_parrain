@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
 
-        home: SideBarLayou(),
+        home: OuvertureApp(),
         routes: {
           "newTasks": (context) => NewTasks(),
           "ongoingTask": (context) => OngoingTask()
