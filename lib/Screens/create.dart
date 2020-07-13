@@ -326,8 +326,7 @@ class _NewTasksState extends State<NewTasks> {
           ),
           body: SingleChildScrollView(
             child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
+              
                 // decoration: BoxDecoration(color:Colors.red),
                 child: Column(
                   children: <Widget>[
@@ -666,8 +665,10 @@ class _NewTasksState extends State<NewTasks> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18),
                               ),
-                            )),
-                          )
+                            ),
+                            ),
+                          ),
+                         
                         ],
                       ),
                     ),
@@ -728,7 +729,8 @@ class _NewTasksState extends State<NewTasks> {
                     //   ),
                     // )
                   ],
-                )),
+                )
+                ),
           ),
           // floatingActionButton: _buildFloatingActionButton(),
         );
