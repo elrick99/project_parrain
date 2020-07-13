@@ -661,25 +661,24 @@ class _NewTasksState extends State<NewTasks> {
                               );
                               _updateUI();
 
-                              Navigator.pushNamed(context, "ongoingTask");
+                              Navigator.popAndPushNamed(context, "ongoingTask");
                             },
-                            child: Expanded(
-                                child: Container(
+                            child: Container(
                               alignment: Alignment.center,
                               width: 250,
                               height: 70,
                               decoration: BoxDecoration(
-                                color: Colors.purple.shade800,
-                                borderRadius: BorderRadius.circular(20),
+                            color: Colors.purple.shade800,
+                            borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                "Enregistrer",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
+                            "Enregistrer",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
                               ),
-                            )),
+                            ),
                           )
                         ],
                       ),
