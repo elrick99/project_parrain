@@ -53,8 +53,6 @@ class TodoItem {
 String priorito;
 
 class NewTasks extends StatefulWidget {
-  final _keyform = GlobalKey<FormState>();
-
   // priorité
 
   Color urgent = Colors.red;
@@ -100,7 +98,13 @@ class _NewTasksState extends State<NewTasks> {
   int id;
   TextStyle ts = TextStyle(fontSize: 13, fontWeight: FontWeight.w500);
   double _width;
+  DateTime date;
+
+  var diferenceofdate;
   var dateofday = " Date de la tache ";
+  var tab;
+  DateTime heure;
+  var diferenceofheure;
   var heureofday = " Heure de la tache";
   static const kDbFileName = 'sqflite_ex.db';
   static const kDbTableName = 'example_tbl';
@@ -312,6 +316,8 @@ class _NewTasksState extends State<NewTasks> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return FutureBuilder<bool>(
       future: _asyncInit(),
       builder: (context, snapshot) {
@@ -324,417 +330,424 @@ class _NewTasksState extends State<NewTasks> {
             backgroundColor: Colors.purple.shade800,
             title: Text("Nouvelle Tache"),
           ),
-          body: SingleChildScrollView(
-            child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                // decoration: BoxDecoration(color:Colors.red),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      // decoration: BoxDecoration(color: Colors.yellow),
-                      child: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                                labelStyle: TextStyle(
-                                  color:
-                                      Colors.purple.shade800.withOpacity(0.5),
-                                ),
-                                labelText: "Nom de tache",
-                                hintText: 'Veuillez entrer le nom de la tache'),
-                            onChanged: (String val) {
-                              title = val;
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Date :",
-                                  style: TextStyle(
-                                      color: Colors.purple.shade800,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
+          body: Builder(
+            builder: (context)=> SingleChildScrollView(
+              child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  // decoration: BoxDecoration(color:Colors.red),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        // decoration: BoxDecoration(color: Colors.yellow),
+                        child: Column(
+                          children: <Widget>[
+                            TextField(
+                              decoration: InputDecoration(
+                                  labelStyle: TextStyle(
+                                    color:
+                                        Colors.purple.shade800.withOpacity(0.5),
+                                  ),
+                                  labelText: "Nom de tache",
+                                  hintText: 'Veuillez entrer le nom de la tache'),
+                              onChanged: (String val) {
+                                title = val;
+                              },
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InkWell(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 1,
-                              height: 70,
-                              decoration: BoxDecoration(color: Colors.white),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      dateofday,
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 18),
-                                    ),
-                                    Icon(
-                                      Icons.today,
-                                      color: Colors.grey,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2018),
-                                lastDate: DateTime(2025),
-                              ).then((DateTime value) {
-                                if (value != null) {
-                                  setState(() {
-                                    dateofday =
-                                        " ${value.year.toString()}/${value.month.toString().padLeft(2, "0")}/${value.day.toString()} ";
-                                    print(dateofday);
-                                  });
-                                }
-                              });
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Heure :",
-                                  style: TextStyle(
-                                      color: Colors.purple.shade800,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InkWell(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 1,
-                              height: 70,
-                              decoration: BoxDecoration(color: Colors.white),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      heureofday,
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 18),
-                                    ),
-                                    Icon(
-                                      Icons.access_time,
-                                      color: Colors.grey,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              DateTime now = DateTime.now();
-                              showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay(
-                                    hour: now.hour, minute: now.minute),
-                              ).then((TimeOfDay value) {
-                                if (value != null) {
-                                  setState(() {
-                                    heureofday =
-                                        " ${value.hour.toString()}h:${value.minute.toString().padLeft(2, "0")}min";
-                                  });
-                                }
-                              });
-                            },
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Priorité :",
-                                  style: TextStyle(
-                                      color: Colors.purple.shade800,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 30),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                priorite = urgent;
-                                priorito = "Urgent";
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
+                            SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
                               child: Row(
                                 children: <Widget>[
-                                  Container(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: BoxDecoration(
-                                      border: (priorite == urgent)
-                                          ? Border.all(
-                                              color: Colors.black, width: 2)
-                                          : Border(),
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
                                   Text(
-                                    "Urgent",
+                                    "Date :",
                                     style: TextStyle(
                                         color: Colors.purple.shade800,
                                         fontSize: 17,
-                                        fontWeight: (priorite == urgent)
-                                            ? FontWeight.bold
-                                            : null),
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                priorite = important;
-                                priorito = "Important";
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: BoxDecoration(
-                                      border: (priorite == important)
-                                          ? Border.all(
-                                              color: Colors.black, width: 2)
-                                          : Border(),
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    "Important",
-                                    style: TextStyle(
-                                        color: Colors.purple.shade800,
-                                        fontSize: 17,
-                                        fontWeight: (priorite == important)
-                                            ? FontWeight.bold
-                                            : null),
-                                  ),
-                                ],
-                              ),
+                            SizedBox(
+                              height: 10,
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                priorite = moins;
-                                priorito = "Moins Important";
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: BoxDecoration(
-                                      border: (priorite == moins)
-                                          ? Border.all(
-                                              color: Colors.black, width: 2)
-                                          : Border(),
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
+                            InkWell(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 1,
+                                height: 70,
+                                decoration: BoxDecoration(color: Colors.white),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        dateofday,
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 18),
+                                      ),
+                                      Icon(
+                                        Icons.today,
+                                        color: Colors.grey,
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    "Moins important",
-                                    style: TextStyle(
-                                        color: Colors.purple.shade800,
-                                        fontSize: 17,
-                                        fontWeight: (priorite == moins)
-                                            ? FontWeight.bold
-                                            : null),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Rappel :",
-                                  style: TextStyle(
-                                      color: Colors.purple.shade800,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: <Widget>[
-                                DropdownButton<int>(
-                                  // Must be one of items.value.
-                                  value: _btn2SelectedVal,
-                                  onChanged: (int newValue) {
+                              ),
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2018),
+                                  lastDate: DateTime(2025),
+                                ).then((DateTime value) {
+                                  if (value != null) {
                                     setState(() {
-                                      _btn2SelectedVal = newValue;
-                                      timing = _btn2SelectedVal;
+                                      dateofday = " ${value.year.toString()}/${value.month.toString().padLeft(2, "0")}/${value.day.toString()} ";
+//                                    date=DateTime(value.year,value.month,value.day,value.hour,value.minute);
+//                                    diferenceofdate= date.difference(DateTime.now());
+//                                      tab = diferenceofdate.split(':');
+
                                     });
-                                  },
-                                  items: this._dropDownMenuItems,
-                                ),
-                              ],
+                                  }
+                                });
+                              },
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          InkWell(
-                            onTap: () async {
-                              await _addTodoItem(
-                                TodoItem(
-                                  content: title,
-                                  date: dateofday,
-                                  heure: heureofday,
-                                  timing: timing,
-                                  priority: priorito,
-                                  createdAt: DateTime.now(),
+                            SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Heure :",
+                                    style: TextStyle(
+                                        color: Colors.purple.shade800,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 1,
+                                height: 70,
+                                decoration: BoxDecoration(color: Colors.white),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        heureofday,
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 18),
+                                      ),
+                                      Icon(
+                                        Icons.access_time,
+                                        color: Colors.grey,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              );
-                              _updateUI();
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text('Show Snackbar'),
-                                duration: Duration(seconds: 3),
-                              ));
-                              Navigator.pushNamed(context, "ongoingTask");
-                            },
-                            child: Expanded(
-                                child: Container(
-                              alignment: Alignment.center,
-                              width: 250,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: Colors.purple.shade800,
-                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Text(
-                                "Enregistrer",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
+                              onTap: () {
+                                DateTime now = DateTime.now();
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+                                  ).then((TimeOfDay value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      heureofday = " ${value.hour.toString()}h:${value.minute.toString().padLeft(2, "0")}min";
+//                                      heure= DateTime(value.hour);
+//                                      diferenceofheure=heure.difference(DateTime.now()).inHours/24;
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                            SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Priorité :",
+                                    style: TextStyle(
+                                        color: Colors.purple.shade800,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
                               ),
-                            )),
-                          )
-                        ],
+                            ),
+                            SizedBox(height: 30),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  priorite = urgent;
+                                  priorito = "Urgent";
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                        border: (priorite == urgent)
+                                            ? Border.all(
+                                                color: Colors.black, width: 2)
+                                            : Border(),
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "Urgent",
+                                      style: TextStyle(
+                                          color: Colors.purple.shade800,
+                                          fontSize: 17,
+                                          fontWeight: (priorite == urgent)
+                                              ? FontWeight.bold
+                                              : null),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  priorite = important;
+                                  priorito = "Important";
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                        border: (priorite == important)
+                                            ? Border.all(color: Colors.black, width: 2) : Border(),
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "Important",
+                                      style: TextStyle(
+                                          color: Colors.purple.shade800,
+                                          fontSize: 17,
+                                          fontWeight: (priorite == important) ? FontWeight.bold : null),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  priorite = moins;
+                                  priorito = "Moins Important";
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                        border: (priorite == moins)
+                                            ? Border.all(
+                                                color: Colors.black, width: 2)
+                                            : Border(),
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "Moins important",
+                                      style: TextStyle(
+                                          color: Colors.purple.shade800,
+                                          fontSize: 17,
+                                          fontWeight: (priorite == moins)
+                                              ? FontWeight.bold
+                                              : null),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Rappel :",
+                                    style: TextStyle(
+                                        color: Colors.purple.shade800,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Row(
+                                children: <Widget>[
+                                  DropdownButton<int>(
+                                    // Must be one of items.value.
+                                    value: _btn2SelectedVal,
+                                    onChanged: (int newValue) {
+                                      setState(() {
+                                        _btn2SelectedVal = newValue;
+                                        timing = _btn2SelectedVal;
+                                      });
+                                    },
+                                    items: this._dropDownMenuItems,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            InkWell(
+                              onTap: () async {
+                                await _addTodoItem(
+                                  TodoItem(
+                                    content: title,
+                                    date: dateofday,
+                                    heure: heureofday,
+                                    timing: timing,
+                                    priority: priorito,
+                                    createdAt: DateTime.now(),
+                                  ),
+                                );
+                                _updateUI();
+//                                Scaffold.of(context).hideCurrentSnackBar();
+//                                SnackBar snackBar = SnackBar(
+//                                  duration: Duration(seconds: 3),
+//                                  content: Text("nous vous rapellerons le $dateofday à $heureofday"),
+//                                );
+//                                Scaffold.of(context).showSnackBar(snackBar);
+//
+//                                //Scaffold.of(context).hideCurrentSnackBar();
+                              Navigator.popAndPushNamed( context, "ongoingTask");
+                              print(diferenceofdate);
+                              print(tab);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 250,
+                                height: 70,
+                                decoration: BoxDecoration(
+                              color: Colors.purple.shade800,
+                              borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                              "Enregistrer",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    /**
-                     * LISTE DES ENREGISTREMENTS
-                     */
-                    // Container(
-                    //   height: 100,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   child: ListView(
-                    //     children: this._todos.map(_itemToListTile).toList(),
-                    //   ),
-                    // ),
-                    /**
-                     * MODIFICATION DES ENREGISTREMENTS
-                     */
-                    // Expanded(
-                    //   child: Row(
-                    //     children: <Widget>[
-                    //       Expanded(
-                    //         child: Container(
-                    //           padding:
-                    //               const EdgeInsets.symmetric(horizontal: 10),
-                    //           child: TextField(
-                    //             controller: teConText,
-                    //             textAlign: TextAlign.center,
-                    //             style: ts,
-                    //             decoration: InputDecoration(
-                    //               filled: true,
-                    //               fillColor: Colors.white,
-                    //               border: OutlineInputBorder(
-                    //                 borderRadius:
-                    //                     BorderRadius.all(Radius.circular(5)),
-                    //                 borderSide: BorderSide(
-                    //                     color: Colors.grey, width: 1),
-                    //               ),
-                    //             ),
-                    //             onChanged: (String val) {
-                    //               change = val;
-                    //             },
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //           child: Container(
-                    //         width: 80,
-                    //         child: InkWell(
-                    //           child: Icon(Icons.sync),
-                    //           onTap: () async {
-                    //             await _toggleTodoItem(
-                    //                 TodoItem(content: change, id: id));
-                    //                 print(id);
-                    //             _updateUI();
-                    //           },
-                    //         ),
-                    //       ))
-                    //     ],
-                    //   ),
-                    // )
-                  ],
-                )),
+                      /**
+                       * LISTE DES ENREGISTREMENTS
+                       */
+                      // Container(
+                      //   height: 100,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   child: ListView(
+                      //     children: this._todos.map(_itemToListTile).toList(),
+                      //   ),
+                      // ),
+                      /**
+                       * MODIFICATION DES ENREGISTREMENTS
+                       */
+                      // Expanded(
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       Expanded(
+                      //         child: Container(
+                      //           padding:
+                      //               const EdgeInsets.symmetric(horizontal: 10),
+                      //           child: TextField(
+                      //             controller: teConText,
+                      //             textAlign: TextAlign.center,
+                      //             style: ts,
+                      //             decoration: InputDecoration(
+                      //               filled: true,
+                      //               fillColor: Colors.white,
+                      //               border: OutlineInputBorder(
+                      //                 borderRadius:
+                      //                     BorderRadius.all(Radius.circular(5)),
+                      //                 borderSide: BorderSide(
+                      //                     color: Colors.grey, width: 1),
+                      //               ),
+                      //             ),
+                      //             onChanged: (String val) {
+                      //               change = val;
+                      //             },
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //           child: Container(
+                      //         width: 80,
+                      //         child: InkWell(
+                      //           child: Icon(Icons.sync),
+                      //           onTap: () async {
+                      //             await _toggleTodoItem(
+                      //                 TodoItem(content: change, id: id));
+                      //                 print(id);
+                      //             _updateUI();
+                      //           },
+                      //         ),
+                      //       ))
+                      //     ],
+                      //   ),
+                      // )
+                    ],
+                  )),
+            ),
           ),
           // floatingActionButton: _buildFloatingActionButton(),
         );
+
       },
     );
   }
+
 
   Future<void> _updateUI() async {
     await _getTodoItems();

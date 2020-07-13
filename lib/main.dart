@@ -12,6 +12,7 @@ import 'package:project_parrain/Screens/inscripton.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import 'package:provider/provider.dart';
+import 'package:project_parrain/Screens/accueilApp.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: SideBarLayou(),
+        home: AccueilApp(),
         routes: {
           "newTasks": (context) => NewTasks(),
           "ongoingTask": (context) => OngoingTask()
