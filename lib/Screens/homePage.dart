@@ -149,7 +149,7 @@ class _OuvertureAppState extends State<OuvertureApp> with TickerProviderStateMix
                   ),
                   ),
                   SizedBox(height: 10,),
-                  FadeAnimation(1.3, Text("bienvenu sur notre application de shop veilliez entrez votre identifiant et votre mot de passe ",
+                  FadeAnimation(1.3, Text("bienvenu sur Agendux veilliez entrez votre identifiant et votre mot de passe ",
                   style:TextStyle(
                     fontSize: 20,
                     color: Colors.white.withOpacity(.7), height: 1.4
