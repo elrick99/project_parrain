@@ -24,7 +24,7 @@ class _SideBarState extends State<SideBar>
   Stream<bool> isSidebarOpenedStream;
   StreamSink<bool> isSidebarOpenedSink;
   final bool istrue = false;
-  final _animateDuration = const Duration(microseconds: 100);
+  final _animateDuration = const Duration(microseconds: 700);
 
   @override
   void initState() {
@@ -80,6 +80,7 @@ class _SideBarState extends State<SideBar>
                 child: SingleChildScrollView(
                                   child: Container(
                     color: Colors.purple.shade800,
+                  height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: <Widget>[
                         SizedBox(
@@ -210,6 +211,9 @@ class _SideBarState extends State<SideBar>
                         //   icon: Icons.person,
                         //   title: "Deconnexion",
                         // ),
+                        
+                        
+                         
                       ],
                     ),
                   ),

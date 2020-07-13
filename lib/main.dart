@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:project_parrain/Providers/Events.dart';
 import 'package:project_parrain/Screens/Home.dart';
+import 'package:project_parrain/Screens/HomePageClickedEvent.dart';
 import 'package:project_parrain/Screens/OngoingTask.dart';
 import 'package:project_parrain/Screens/PriorityTask.dart';
 import 'package:project_parrain/Screens/Taskcancelled.dart';
 import 'package:project_parrain/Screens/Taskperformed.dart';
 import 'package:project_parrain/Screens/accueil.dart';
 import 'package:project_parrain/Screens/create.dart';
+
+import 'package:project_parrain/Screens/homePage.dart';
 import 'package:project_parrain/Screens/inscription.dart';
 import 'package:project_parrain/Screens/inscripton.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import 'package:provider/provider.dart';
-import 'package:project_parrain/Screens/accueilApp.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +32,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: AccueilApp(),
+
+        home: SideBarLayou(),
         routes: {
           "newTasks": (context) => NewTasks(),
           "ongoingTask": (context) => OngoingTask()
