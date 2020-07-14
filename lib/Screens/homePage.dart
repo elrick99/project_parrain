@@ -4,14 +4,15 @@ import 'package:page_transition/page_transition.dart';
 import 'package:project_parrain/Screens/sideBar.dart';
 import 'package:project_parrain/Screens/sideBarLayout.dart';
 import '../animation/fadeanimation.dart';
+import 'homp.dart';
 
 
-class Login extends StatefulWidget {
+class OuvertureApp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _OuvertureAppState createState() => _OuvertureAppState();
 }
 
-class _LoginState extends State<Login> with TickerProviderStateMixin{
+class _OuvertureAppState extends State<OuvertureApp> with TickerProviderStateMixin{
   AnimationController _scaleController;
   AnimationController _scale2Controller;
   AnimationController _widthController;
@@ -80,11 +81,13 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
             end: 32.0
             ).animate( _scale2Controller)..addStatusListener((status){
              if(status == AnimationStatus.completed){
-              Navigator.push(context, 
-              PageTransition(type: PageTransitionType.fade, child:SideBarLayou() )
+              Navigator.pushReplacement(context,
+                  //faire la transition sur une autre page
+                  PageTransition(type: PageTransitionType.fade, child:Homp() )
               );
              }
-            }); 
+
+            });
             }
 
   @override
@@ -97,42 +100,42 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
         width: double.infinity,
         child: Stack(
           children: <Widget>[
-            Positioned(
-              top: -50,
-              left: 0,
-              child:FadeAnimation(1, Container(
-                  width: width,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    image:DecorationImage(image:  AssetImage('images/eau.png'),fit: BoxFit.cover)
-                  ),
-              )
-              )
-            ),
-                   Positioned(
-              top: -100,
-              left: 0,
-              child: FadeAnimation(1.3, Container(
-                  width: width,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    image:DecorationImage(image:  AssetImage('eau/fond.jpg'),fit: BoxFit.cover)
-                  ),
-              )
-              )
-            ),
-                   Positioned(
-              top: -150,
-              left: 0,
-              child: FadeAnimation(1.6, Container(
-                  width: width,
-                  height: 400,
-                  decoration: BoxDecoration(
-                    image:DecorationImage(image:  AssetImage('images/eau.png'),fit: BoxFit.cover)
-                  ),
-              )
-              )
-            ),
+            // Positioned(
+            //   top: -50,
+            //   left: 0,
+            //   child:FadeAnimation(1, Container(
+            //       width: width,
+            //       height: 400,
+            //       decoration: BoxDecoration(
+            //         image:DecorationImage(image:  AssetImage('images/eau.png'),fit: BoxFit.cover)
+            //       ),
+            //   )
+            //   )
+            // ),
+            //        Positioned(
+            //   top: -100,
+            //   left: 0,
+            //   child: FadeAnimation(1.3, Container(
+            //       width: width,
+            //       height: 400,
+            //       decoration: BoxDecoration(
+            //         image:DecorationImage(image:  AssetImage('eau/fond.jpg'),fit: BoxFit.cover)
+            //       ),
+            //   )
+            //   )
+            // ),
+            //        Positioned(
+            //   top: -150,
+            //   left: 0,
+            //   child: FadeAnimation(1.6, Container(
+            //       width: width,
+            //       height: 400,
+            //       decoration: BoxDecoration(
+            //         image:DecorationImage(image:  AssetImage('images/eau.png'),fit: BoxFit.cover)
+            //       ),
+            //   )
+            //   )
+            // ),
             Container(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -149,7 +152,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin{
                   ),
                   ),
                   SizedBox(height: 10,),
-                  FadeAnimation(1.3, Text("bienvenu sur notre application de shop veilliez entrez votre identifiant et votre mot de passe ",
+                  FadeAnimation(1.3, Text("bienvenu sur Agendux veilliez entrez votre identifiant et votre mot de passe ",
                   style:TextStyle(
                     fontSize: 20,
                     color: Colors.white.withOpacity(.7), height: 1.4

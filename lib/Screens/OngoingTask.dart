@@ -8,6 +8,7 @@ import 'package:project_parrain/Providers/Events.dart';
 import 'package:provider/provider.dart';
 
 class TodoItem {
+  
   final int id;
   final String content;
   // SQLite doesn't supprot boolean. Use INTEGER/BIT (0/1 values).
@@ -57,6 +58,9 @@ class OngoingTask extends StatefulWidget {
 }
 
 class _OngoingTaskState extends State<OngoingTask> {
+  var urgent= "rouge";
+  var important= "vert";
+  var moinImportante="bleu";
   int id;
   static const kDbFileName = 'sqflite_ex.db';
   static const kDbTableName = 'example_tbl';
@@ -258,11 +262,7 @@ class _OngoingTaskState extends State<OngoingTask> {
                 height: 100,
                 width: 10,
                 decoration: BoxDecoration(
-                    color: (todo.priority == "Urgent" ||
-                            todo.priority == "Moins Important" ||
-                            todo.priority == "Important")
-                        ? Colors.red[400]
-                        : Colors.green[400],
+                    color:colore(todo.priority) ,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
@@ -309,4 +309,23 @@ class _OngoingTaskState extends State<OngoingTask> {
           ),
         ),
       );
+
+   colore(String ok){
+    switch(ok){
+      case 'Urgent':
+       return Colors.red;
+        break;
+      case 'Moins Important':
+       return Colors.blue;
+        break;
+      case 'Important':
+       return Colors.green;
+        break;
+
+
+    }
+  }
+
 }
+
+
